@@ -228,8 +228,9 @@
     }
 
     // Full wheelchair assembly at the top
+    // Rotated forward 90° (was -π/2 with back wheel on bottom, now 0 stands upright)
     initMultiSTLViewer('mech-wheelchair-viewer', wcModels, {
-      height: 400, rotationX: -Math.PI / 2
+      height: 400, rotationX: 0
     });
 
     // Planetary gear detail further down
