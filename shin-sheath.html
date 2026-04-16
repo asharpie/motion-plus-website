@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shin Sheath — Motion+</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      background-color: #0A0A0A;
+      color: white;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .breadcrumb {
+      padding-top: calc(var(--nav-height, 80px) + 1.5rem);
+      padding-bottom: 1rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .breadcrumb a {
+      color: #aaa;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: #DC143C;
+    }
+
+    .product-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .product-hero-text {
+      z-index: 2;
+    }
+
+    .product-hero-text h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin: 1rem 0;
+      line-height: 1.2;
+    }
+
+    .product-hero-text .tagline {
+      font-size: 1.3rem;
+      color: #DC143C;
+      margin: 1rem 0 2rem 0;
+      font-weight: 500;
+    }
+
+    .patent-badge {
+      display: inline-block;
+      background: rgba(220, 20, 60, 0.1);
+      border: 1px solid #DC143C;
+      color: #DC143C;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .price-tag {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #DC143C;
+      margin: 1.5rem 0;
+    }
+
+    .price-compare {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-bottom: 2rem;
+    }
+
+    .price-compare .compared {
+      color: #DC143C;
+      font-weight: 600;
+      margin: 0 0.25rem;
+    }
+
+    .product-hero-image {
+      position: relative;
+      height: 500px;
+    }
+
+    .section {
+      margin: 5rem 0;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #DC143C;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: rgba(220, 20, 60, 0.05);
+      border: 1px solid rgba(220, 20, 60, 0.2);
+      padding: 2rem;
+      border-radius: 0.5rem;
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #DC143C;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .label {
+      font-size: 0.85rem;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .step-item {
+      text-align: center;
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      background: #DC143C;
+      color: #0A0A0A;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto 1rem auto;
+    }
+
+    .step-item h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-item p {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .stl-viewer-container {
+      background: rgba(220, 20, 60, 0.05);
+      border: 1px solid rgba(220, 20, 60, 0.2);
+      border-radius: 0.5rem;
+      overflow: hidden;
+      min-height: 400px;
+      position: relative;
+    }
+
+    .stl-viewer-container > div {
+      width: 100%;
+    }
+
+    .stl-viewer-hint {
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+      background: rgba(0, 0, 0, 0.4);
+      border-top: 1px solid rgba(220, 20, 60, 0.2);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .feature-item {
+      padding: 2rem;
+      background: rgba(220, 20, 60, 0.05);
+      border: 1px solid rgba(220, 20, 60, 0.2);
+      border-radius: 0.5rem;
+    }
+
+    .feature-item h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    .feature-item p {
+      font-size: 0.9rem;
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      color: #DC143C;
+      margin-bottom: 0.5rem;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      background: rgba(220, 20, 60, 0.05);
+      border: 1px solid rgba(220, 20, 60, 0.2);
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 1.5rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(220, 20, 60, 0.2);
+    }
+
+    .comparison-table th {
+      background: rgba(220, 20, 60, 0.1);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comparison-table .highlight {
+      color: #DC143C;
+      font-weight: 600;
+    }
+
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(220, 20, 60, 0.15) 0%, rgba(220, 20, 60, 0.05) 100%);
+      border: 1px solid rgba(220, 20, 60, 0.3);
+      border-radius: 0.5rem;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 4rem 0;
+    }
+
+    .cta-banner h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-banner p {
+      font-size: 1.1rem;
+      color: #aaa;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      border-radius: 0.25rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #DC143C;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #b01030;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #DC143C;
+      border: 1px solid #DC143C;
+    }
+
+    .btn-outline:hover {
+      background: rgba(220, 20, 60, 0.1);
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(220, 20, 60, 0.2);
+      margin: 3rem 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .text-crimson {
+      color: #DC143C;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .product-hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .product-hero-text h1 {
+        font-size: 2rem;
+      }
+
+      .stats-row,
+      .steps-row,
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <a href="index.html">Home</a> &gt;
+      <a href="index.html#products">Products</a> &gt;
+      <span>Shin Sheath</span>
+    </nav>
+
+    <!-- Product Hero -->
+    <section class="product-hero fade-in">
+      <div class="product-hero-text">
+        <div class="patent-badge">Provisional Patent Holder</div>
+        <h1>Shin Sheath</h1>
+        <p class="tagline">"Custom-fit. Protective. Expressive."</p>
+        <p>A parametric, 3D-printed prosthetic cover designed for comfort, affordability, and personal expression.</p>
+        <div class="price-tag">Starting at $200</div>
+        <div class="price-compare">
+          Compared to traditional covers: <span class="compared">$500–$2,000</span>
+        </div>
+        <div>
+          <button class="btn btn-primary">Explore Now</button>
+          <button class="btn btn-outline" style="margin-left: 1rem;">Learn More</button>
+        </div>
+      </div>
+      <div class="product-hero-image">
+        <div class="stl-viewer-container" style="min-height:420px;">
+          <div id="shin-sheath-cover-viewer" style="width:100%;height:400px;"></div>
+          <div class="stl-viewer-hint">Click &amp; drag to rotate &bull; Scroll to zoom</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Stats Section -->
+    <section class="section fade-in">
+      <div class="section-label">Key Metrics</div>
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="number">~85%</div>
+          <div class="label">Gross Margin</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">$20–$30</div>
+          <div class="label">Production Cost</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">$2.5K</div>
+          <div class="label">Big Ideas 3rd Place</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">∞</div>
+          <div class="label">Customization Options</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- How It Works -->
+    <section class="section fade-in">
+      <div class="section-label">How It Works</div>
+      <h2 style="font-size: 2rem; margin-bottom: 2rem;">Four-Step Process</h2>
+      <div class="steps-row">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <h3>Measure</h3>
+          <p>Capture your exact prosthetic dimensions using simple tools or digital imaging.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <h3>Generate</h3>
+          <p>Parametric modeling automatically scales the design to your unique specifications.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <h3>Customize</h3>
+          <p>Choose materials (PLA or PETG), colors, patterns, and personalization options.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <h3>Print</h3>
+          <p>Print on any consumer-grade 3D printer and wear with confidence.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 3D Model Showcase -->
+    <section class="section fade-in">
+      <div class="section-label">3D Model Showcase</div>
+      <h2 style="font-size: 2rem; margin-bottom: 2rem;">Explore the Design</h2>
+
+      <!-- Front and Back Pieces -->
+      <h3 style="margin: 2rem 0 1rem 0;">Prosthetic Leg Components</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <div class="stl-viewer-container" style="min-height:370px;">
+          <div id="shin-sheath-front-viewer" style="width:100%;height:350px;"></div>
+          <div class="stl-viewer-hint">Front piece</div>
+        </div>
+        <div class="stl-viewer-container" style="min-height:370px;">
+          <div id="shin-sheath-back-viewer" style="width:100%;height:350px;"></div>
+          <div class="stl-viewer-hint">Back piece</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Features Grid -->
+    <section class="section fade-in">
+      <div class="section-label">Core Features</div>
+      <h2 style="font-size: 2rem; margin-bottom: 2rem;">Why Shin Sheath</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <div><h4>Custom-Fit</h4>
+          <p>Parametric modeling ensures every cover fits your prosthetic perfectly, without manual adjustments.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><h4>Protective</h4>
+          <p>Durable PLA or PETG material shields your prosthetic from scratches, impacts, and daily wear.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div><h4>Expressive</h4>
+          <p>Choose colors, patterns, and designs that reflect your style and personality — unlimited options.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div><h4>Scalable</h4>
+          <p>Parametric model scales without linear cost growth, enabling sustainable production and innovation.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Comparison Section -->
+    <section class="section fade-in">
+      <div class="section-label">The Difference</div>
+      <h2 style="font-size: 2rem; margin-bottom: 2rem;">Shin Sheath vs. Traditional Covers</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Traditional Prosthetic Covers</th>
+            <th class="text-crimson">Shin Sheath</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Cost</strong></td>
+            <td>$500–$2,000</td>
+            <td class="highlight">$200–$400</td>
+          </tr>
+          <tr>
+            <td><strong>Customization</strong></td>
+            <td>Limited, often requires re-manufacturing</td>
+            <td class="highlight">Infinite via parametric model</td>
+          </tr>
+          <tr>
+            <td><strong>Production Time</strong></td>
+            <td>Weeks or months</td>
+            <td class="highlight">Hours</td>
+          </tr>
+          <tr>
+            <td><strong>Manufacturing</strong></td>
+            <td>Specialized facilities, high overhead</td>
+            <td class="highlight">Home 3D printer, low overhead</td>
+          </tr>
+          <tr>
+            <td><strong>Material Flexibility</strong></td>
+            <td>Limited to manufacturer's offerings</td>
+            <td class="highlight">PLA, PETG, or other filaments</td>
+          </tr>
+          <tr>
+            <td><strong>Insurance Coverage</strong></td>
+            <td>Often denied</td>
+            <td class="highlight">Eligible, affordable alternative</td>
+          </tr>
+          <tr>
+            <td><strong>Gross Margin</strong></td>
+            <td>~40–60%</td>
+            <td class="highlight">~85%</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Recognition -->
+    <section class="section fade-in">
+      <div class="section-label">Recognition</div>
+      <h2 style="font-size: 2rem; margin-bottom: 1rem;">Awards &amp; Honors</h2>
+      <p style="font-size: 1.05rem; color: #ddd; margin-bottom: 1rem;">
+        <strong class="text-crimson">3rd Place ($2,500) — UA Big Ideas Competition (April 2026)</strong>
+      </p>
+      <p style="color: #aaa;">
+        Associated with Michael Auprince, UA Men's Wheelchair Basketball Assistant Coach.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner fade-in">
+      <h2>Ready to Transform Your Prosthetic Experience?</h2>
+      <p>Join hundreds discovering affordable, customizable prosthetic protection. Starting at just $200.</p>
+      <div>
+        <button class="btn btn-primary">Get Started Today</button>
+        <button class="btn btn-outline" style="margin-left: 1rem;">Schedule a Consultation</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/model-shin-cover.js"></script>
+  <script src="js/model-shin-front.js"></script>
+  <script src="js/model-shin-back.js"></script>
+  <script src="js/stl-viewer.js"></script>
+  <script>
+    initSTLViewer('shin-sheath-cover-viewer', 'STL_SHIN_COVER', {
+      color: 0xaaaaaa, height: 400, rotationX: -Math.PI / 2
+    });
+    initSTLViewer('shin-sheath-front-viewer', 'STL_SHIN_FRONT', {
+      color: 0xcccccc, height: 350, rotationX: -Math.PI / 2
+    });
+    initSTLViewer('shin-sheath-back-viewer', 'STL_SHIN_BACK', {
+      color: 0xcccccc, height: 350, rotationX: -Math.PI / 2
+    });
+  </script>
+</body>
+</html>

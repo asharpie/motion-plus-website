@@ -1,0 +1,24 @@
+# ══════════════════════════════════════════════
+#  Motion+ LLC — Team Email Addresses
+# ══════════════════════════════════════════════
+#
+#  To add a new team member, add a new line below
+#  in the format:   email | Full Name | Role
+#
+#  Then follow the instructions in EMAIL-SETUP-GUIDE.md
+#  to create their mailbox in Zoho Mail.
+#
+# ══════════════════════════════════════════════
+
+# Team Mailbox (shared)
+team@motionplusllc.com | Motion+ Team | Shared Inbox
+
+# Individual Mailboxes
+asharp@motionplusllc.com | Aaron Sharp | COO
+jpark@motionplusllc.com | Jesse Park | CEO
+sonyishi@motionplusllc.com | Sandra Onyishi | CFO
+adavidson@motionplusllc.com | Alexzander Davidson | CTO
+
+# ══════════════════════════════════════════════
+#  ADD NEW TEAM MEMBERS BELOW THIS LINE
+# ══════════════════════════════════════════════

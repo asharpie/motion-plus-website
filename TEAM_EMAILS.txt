@@ -1,0 +1,26 @@
+# ============================================
+# Motion+ LLC — Team Email Addresses
+# ============================================
+# Add new team members below in the format:
+#   FirstName LastName | email@motionplusllc.com | Role
+#
+# After adding a new entry here, create the account
+# in Zoho Mail admin panel (see EMAIL_SETUP_GUIDE.md)
+# ============================================
+
+Aaron Sharp      | asharp@motionplusllc.com    | COO
+Jesse Park       | jpark@motionplusllc.com     | CEO
+Sandra Onyishi   | sonyishi@motionplusllc.com  | CFO
+Alexzander Davidson | adavidson@motionplusllc.com | CTO
+Team (shared)    | team@motionplusllc.com      | Company-wide
+
+# ============================================
+# TO ADD A NEW TEAM MEMBER:
+# 1. Add their info above in the same format
+# 2. Log in to Zoho Mail admin: https://mailadmin.zoho.com
+# 3. Go to Users > Add User
+# 4. Enter their name and email prefix
+# 5. Set a temporary password and send it to them
+# 6. They can set up their mail app using the
+#    settings in EMAIL_SETUP_GUIDE.md
+# ============================================
