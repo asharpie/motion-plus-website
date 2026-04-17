@@ -1,0 +1,9 @@
+{
+  "name": "motionplus-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Motion+ LLC website with order processing API",
+  "scripts": {
+    "start": "npx serve ."
+  }
+}

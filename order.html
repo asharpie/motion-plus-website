@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order — Motion+</title>
+  <meta name="description" content="Order Motion+ adaptive mobility products. U-Clamp, Wrapid, and Shin Sheath available for purchase." />
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/order.css" />
+</head>
+<body>
+
+  <!-- Breadcrumb -->
+  <section class="breadcrumb">
+    <div class="container">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <span>Order</span>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <section class="section" style="padding-bottom: 2rem;">
+    <div class="container" style="text-align: center; max-width: 700px;">
+      <h1>Order Your Product</h1>
+      <p style="color: #aaa; font-size: 1.1rem; margin-top: 1rem;">Select a product, enter your details, and we'll reach out to finalize your order. Custom products are made-to-order just for you.</p>
+    </div>
+  </section>
+
+  <!-- Product Selection Cards -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="order-products-grid" id="productGrid">
+
+        <div class="order-product-card" data-product="uclamp" onclick="selectProduct('uclamp')">
+          <div class="order-card-img">
+            <img src="assets/images/products/u-clamp/iso-view.jpg" alt="U-Clamp" />
+          </div>
+          <div class="order-card-body">
+            <h3>U-Clamp</h3>
+            <p class="order-card-tagline">Universal Scooter Adapter</p>
+            <p class="order-card-price">$200</p>
+            <p class="order-card-desc">Attach any electric scooter to your wheelchair. Standard size fits all.</p>
+          </div>
+          <div class="order-card-check"><span>&#10003;</span></div>
+        </div>
+
+        <div class="order-product-card" data-product="wrapid" onclick="selectProduct('wrapid')">
+          <div class="order-card-img">
+            <img src="assets/images/products/wrapid/prototype-on-wheelchair.jpg" alt="Wrapid" />
+          </div>
+          <div class="order-card-body">
+            <h3>Wrapid</h3>
+            <p class="order-card-tagline">Magnetic Wheel Cover</p>
+            <p class="order-card-price">Starting at $79</p>
+            <p class="order-card-desc">All-terrain wheel cover. Requires your wheel diameter for custom fit.</p>
+          </div>
+          <div class="order-card-check"><span>&#10003;</span></div>
+        </div>
+
+        <div class="order-product-card" data-product="shinshe" onclick="selectProduct('shinshe')">
+          <div class="order-card-img">
+            <img src="assets/images/products/shin-sheath/shin-sheath-closeup.jpeg" alt="Shin Sheath" />
+          </div>
+          <div class="order-card-body">
+            <h3>Shin Sheath</h3>
+            <p class="order-card-tagline">Custom Prosthetic Cover</p>
+            <p class="order-card-price">Starting at $200</p>
+            <p class="order-card-desc">3D-printed prosthetic cover. Custom-fit to your exact measurements.</p>
+          </div>
+          <div class="order-card-check"><span>&#10003;</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Order Form (hidden until product selected) -->
+  <section class="section" id="orderFormSection" style="display: none; background: #111; padding-top: 3rem; padding-bottom: 3rem;">
+    <div class="container" style="max-width: 800px;">
+      <h2 id="formTitle" style="margin-bottom: 2rem; text-align: center;">Configure Your <span class="text-crimson" id="formProductName">Product</span></h2>
+
+      <form id="orderForm" novalidate>
+        <input type="hidden" name="product" id="selectedProduct" />
+
+        <!-- Product-specific fields inserted here by JS -->
+        <div id="productFields"></div>
+
+        <!-- Customer Information -->
+        <div class="order-form-section">
+          <h3 class="order-form-heading">Your Information</h3>
+          <div class="order-form-row">
+            <div class="order-form-field">
+              <label for="custName">Full Name *</label>
+              <input type="text" id="custName" name="customerName" required placeholder="First and last name" />
+            </div>
+            <div class="order-form-field">
+              <label for="custEmail">Email *</label>
+              <input type="email" id="custEmail" name="customerEmail" required placeholder="you@example.com" />
+            </div>
+          </div>
+          <div class="order-form-row">
+            <div class="order-form-field">
+              <label for="custPhone">Phone (optional)</label>
+              <input type="tel" id="custPhone" name="customerPhone" placeholder="(555) 555-5555" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Shipping -->
+        <div class="order-form-section">
+          <h3 class="order-form-heading">Shipping Address</h3>
+          <div class="order-form-field" style="margin-bottom: 1rem;">
+            <label for="shipStreet">Street Address *</label>
+            <input type="text" id="shipStreet" name="shipStreet" required placeholder="123 Main St, Apt 4B" />
+          </div>
+          <div class="order-form-row">
+            <div class="order-form-field">
+              <label for="shipCity">City *</label>
+              <input type="text" id="shipCity" name="shipCity" required placeholder="Tuscaloosa" />
+            </div>
+            <div class="order-form-field" style="max-width: 120px;">
+              <label for="shipState">State *</label>
+              <input type="text" id="shipState" name="shipState" required placeholder="AL" maxlength="2" />
+            </div>
+            <div class="order-form-field" style="max-width: 140px;">
+              <label for="shipZip">ZIP *</label>
+              <input type="text" id="shipZip" name="shipZip" required placeholder="35401" maxlength="10" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="order-form-section">
+          <div class="order-form-field">
+            <label for="orderNotes">Additional Notes (optional)</label>
+            <textarea id="orderNotes" name="notes" rows="3" placeholder="Any special requests or questions..."></textarea>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%; padding: 1rem; font-size: 1.05rem; margin-top: 1rem;">
+          Submit Order Request
+        </button>
+        <p style="text-align: center; color: #888; font-size: 0.85rem; margin-top: 1rem;">
+          This is an order request, not a final charge. We'll contact you to confirm details and arrange a payment method.
+        </p>
+
+        <!-- Status -->
+        <div id="orderStatus" style="margin-top: 1.5rem; padding: 1rem; border-radius: 8px; display: none;"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      <h2 style="text-align: center; margin-bottom: 2rem;">Ordering FAQ</h2>
+      <div class="order-faq-item">
+        <h4>How does ordering work?</h4>
+        <p>Submit your order request with product details and shipping info. We'll email you within 1-2 business days to confirm your order and arrange a payment method (Venmo, PayPal, or bank transfer).</p>
+      </div>
+      <div class="order-faq-item">
+        <h4>How long does shipping take?</h4>
+        <p>Custom products (Shin Sheath, Wrapid) are made-to-order and typically ship within 2-3 weeks. Standard products (U-Clamp) ship within 5-7 business days.</p>
+      </div>
+      <div class="order-faq-item">
+        <h4>What if I don't know my measurements?</h4>
+        <p>No worries! Submit your order request and note that you need measurement guidance. We'll send you a detailed measurement guide with photos and instructions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Questions Before Ordering?</h2>
+      <p>Our team is happy to help you find the right product and size.</p>
+      <a href="contact.html" class="btn btn-primary">Contact Us</a>
+    </div>
+  </section>
+
+  <script src="js/main.js"></script>
+  <script src="js/order.js"></script>
+</body>
+</html>

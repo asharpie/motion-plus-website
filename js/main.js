@@ -42,6 +42,7 @@ function buildNav() {
           </div>
         </div>
         <a href="about.html" class="${page === 'about' ? 'active' : ''}">About</a>
+        <a href="order.html" class="${page === 'order' ? 'active' : ''}" style="color: #DC143C; font-weight: 600;">Order</a>
         <a href="investors.html" class="${page === 'investors' ? 'active' : ''}">Investors</a>
         <a href="contact.html" class="${page === 'contact' ? 'active' : ''}">Contact</a>
       </div>
