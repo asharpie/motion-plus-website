@@ -51,7 +51,13 @@ function selectProduct(productId) {
 
   // Update title
   var names = { uclamp: 'U-Clamp', wrapid: 'Wrapid', shinshe: 'Shin Sheath' };
+  var isPreorder = productId === 'uclamp' || productId === 'wrapid';
   document.getElementById('formProductName').textContent = names[productId] || 'Product';
+  document.getElementById('formTitle').firstChild.textContent = isPreorder ? 'Pre-Order Your ' : 'Configure Your ';
+
+  // Update submit button text
+  var submitBtn = document.getElementById('submitBtn');
+  submitBtn.textContent = isPreorder ? 'Submit Pre-Order Request' : 'Submit Order Request';
 
   // Build product-specific fields
   var fieldsContainer = document.getElementById('productFields');
@@ -77,7 +83,7 @@ function buildUClampFields() {
     '<div style="background: rgba(220,20,60,0.04); border: 1px solid rgba(220,20,60,0.1); border-radius: 12px; padding: 1.25rem;">' +
     '<p style="color: #ccc; margin: 0;">The U-Clamp is a universal fit adapter — no custom sizing needed. ' +
     'Works with standard manual wheelchairs and electric scooters.</p>' +
-    '<p style="color: #DC143C; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0;">Price: $200</p>' +
+    '<p style="color: #e6a817; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0;">Pre-Order — $200 &bull; Expected to ship Q3 2026</p>' +
     '</div>' +
     '<div class="order-form-field" style="margin-top: 1rem;">' +
     '<label for="uclampQty">Quantity</label>' +
@@ -95,6 +101,10 @@ function buildUClampFields() {
 function buildWrapidFields() {
   return '<div class="order-form-section">' +
     '<h3 class="order-form-heading">Wheel Specifications</h3>' +
+    '<div style="background: rgba(230,168,23,0.08); border: 1px solid rgba(230,168,23,0.2); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem;">' +
+    '<p style="color: #e6a817; font-weight: 600; margin: 0;">Pre-Order &bull; Expected to ship Q3 2026</p>' +
+    '<p style="color: #999; font-size: 0.85rem; margin: 0.5rem 0 0 0;">You won\'t be charged now. We\'ll reach out to confirm details and arrange payment closer to the ship date.</p>' +
+    '</div>' +
     '<div class="order-form-row">' +
     '<div class="order-form-field">' +
     '<label for="wheelDiam">Wheelchair Wheel Diameter *</label>' +
@@ -144,6 +154,43 @@ function buildShinSheathFields() {
     });
     html += '</div></div>';
   });
+
+  html += '<div class="order-form-section" style="margin-top: 1.5rem;">' +
+    '<h3 class="order-form-heading">Color Selection</h3>' +
+    '<p style="color: #999; font-size: 0.9rem; margin-bottom: 1rem;">' +
+    'Choose a color for your Shin Sheath. The cover is 3D-printed in your selected color.</p>' +
+    '<div class="color-picker-grid" id="colorPicker">' +
+    '<label class="color-swatch" title="Black">' +
+    '<input type="radio" name="color" value="Black" checked />' +
+    '<span class="swatch" style="background:#1a1a1a;"></span><span class="swatch-label">Black</span></label>' +
+    '<label class="color-swatch" title="White">' +
+    '<input type="radio" name="color" value="White" />' +
+    '<span class="swatch" style="background:#f0f0f0;"></span><span class="swatch-label">White</span></label>' +
+    '<label class="color-swatch" title="Crimson">' +
+    '<input type="radio" name="color" value="Crimson" />' +
+    '<span class="swatch" style="background:#DC143C;"></span><span class="swatch-label">Crimson</span></label>' +
+    '<label class="color-swatch" title="Navy Blue">' +
+    '<input type="radio" name="color" value="Navy Blue" />' +
+    '<span class="swatch" style="background:#1B2A4A;"></span><span class="swatch-label">Navy</span></label>' +
+    '<label class="color-swatch" title="Forest Green">' +
+    '<input type="radio" name="color" value="Forest Green" />' +
+    '<span class="swatch" style="background:#2D5A27;"></span><span class="swatch-label">Forest</span></label>' +
+    '<label class="color-swatch" title="Silver">' +
+    '<input type="radio" name="color" value="Silver" />' +
+    '<span class="swatch" style="background:#A8A9AD;"></span><span class="swatch-label">Silver</span></label>' +
+    '<label class="color-swatch" title="Purple">' +
+    '<input type="radio" name="color" value="Purple" />' +
+    '<span class="swatch" style="background:#5B2C6F;"></span><span class="swatch-label">Purple</span></label>' +
+    '<label class="color-swatch" title="Orange">' +
+    '<input type="radio" name="color" value="Orange" />' +
+    '<span class="swatch" style="background:#E67E22;"></span><span class="swatch-label">Orange</span></label>' +
+    '</div>' +
+    '<div class="order-form-field" style="margin-top: 1rem;">' +
+    '<label for="customColor">Or enter a custom color (optional)</label>' +
+    '<input type="text" id="customColor" name="customColor" placeholder="e.g., Sky Blue, Matte Gold, #3498db" />' +
+    '<span class="field-hint">If you have a specific color in mind, type it here and we\'ll match it as closely as possible.</span>' +
+    '</div>' +
+    '</div>';
 
   html += '<div class="order-form-field" style="margin-top: 1rem;">' +
     '<label for="shinQty">Quantity</label>' +
@@ -200,7 +247,11 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
     var result = await res.json();
 
     if (res.ok && result.success) {
-      showOrderStatus('Order request submitted! Check your email (' + data.customerEmail + ') for a confirmation. We will be in touch within 1-2 business days to finalize your order.', false);
+      var isPreorderProduct = data.product === 'uclamp' || data.product === 'wrapid';
+      var successMsg = isPreorderProduct
+        ? 'Pre-order submitted! Check your email (' + data.customerEmail + ') for a confirmation. We\u2019ll contact you when the product is ready to ship.'
+        : 'Order request submitted! Check your email (' + data.customerEmail + ') for a confirmation. We will be in touch within 1-2 business days to finalize your order.';
+      showOrderStatus(successMsg, false);
       form.reset();
       // Deselect product cards
       document.querySelectorAll('.order-product-card').forEach(function(c) { c.classList.remove('selected'); });
